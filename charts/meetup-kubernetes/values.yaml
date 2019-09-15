@@ -43,7 +43,7 @@ canary:
   service:
     # Istio virtual service host names
     hosts:
-    - meetup-kubernetes.jx-production.jx.juvo.cloud
+    - meetup-kubernetes.jx-production.juvo.cloud
     gateways:
     - jx-gateway.istio-system.svc.cluster.local
   canaryAnalysis:
