@@ -39,7 +39,7 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 canary:
-  enable: false
+  enable: true
   service:
     # Istio virtual service host names
     hosts:
