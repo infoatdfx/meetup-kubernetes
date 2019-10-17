@@ -23,10 +23,10 @@ service:
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
 resources:
   limits:
-    cpu: 500m
+    cpu: 1000m
     memory: 512Mi
   requests:
-    cpu: 400m
+    cpu: 500m
     memory: 512Mi
 probePath: /actuator/health
 livenessProbe:
@@ -39,3 +39,34 @@ readinessProbe:
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 1
+
+canary:
+  enable: true
+  service:
+    # Istio virtual service host names
+    hosts:
+    - meetup-kubernetes.jx-production.juvo.cloud
+    gateways:
+    - jx-gateway.istio-system.svc.cluster.local
+  canaryAnalysis:
+    # schedule interval (default 60s)
+    interval: 60s
+    # max number of failed metric checks before rollback
+    threshold: 5
+    # max traffic percentage routed to canary
+    # percentage (0-100)
+    maxWeight: 50
+    # canary increment step
+    # percentage (0-100)
+    stepWeight: 10
+    metrics:
+    - name: istio_requests_total
+      # minimum req success rate (non 5xx responses)
+      # percentage (0-100)
+      threshold: 99
+      interval: 60s
+    - name: istio_request_duration_seconds_bucket
+      # maximum req duration P99
+      # milliseconds
+      threshold: 500
+      interval: 60s
