@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>cloud.juvo</groupId>
 	<artifactId>meetup</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.23</version>
 	<name>meetup-kubernetes</name>
 	<description>Demo project for Spring Boot on Kubernetes</description>
 
